@@ -29,7 +29,7 @@ export class PostService {
 
     this.http
       .post<{ message: string; post: Post}>(
-        'http://16.171.6.93:80/api/posts',
+        'http://13.48.195.6:80/api/posts',
         postData
       )
       .subscribe({
@@ -50,7 +50,7 @@ export class PostService {
       .get<{
         message: string;
         posts: {_id: string, title: string, content: string, imagePath: string, __v: number}[];
-      }>('http://16.171.6.93:80/api/posts')
+      }>('http://13.48.195.6:80/api/posts')
       .pipe(
         map(responseData => {
           return {
@@ -79,7 +79,7 @@ export class PostService {
 
   deletePost(id: string): void {
     this.http
-      .delete(`http://16.171.6.93:80/api/posts/${id}`)
+      .delete(`http://13.48.195.6:80/api/posts/${id}`)
       .subscribe((responseData) => {
         this.posts = this.posts.filter((post) => post.id != id);
 
@@ -98,7 +98,7 @@ export class PostService {
       postData.append('image', currentPost.imagePath, currentPost.title);
 
       this.http
-      .put<{message: string}>('http://16.171.6.93:80/api/posts/' + currentPost.id, postData)
+      .put<{message: string}>('http://13.48.195.6:80/api/posts/' + currentPost.id, postData)
       .subscribe((responseData) => {
         this.router.navigate([''])
       });
@@ -107,7 +107,7 @@ export class PostService {
 
 
     this.http
-      .put<{message: string}>('http://16.171.6.93:80/api/posts/' + currentPost.id, currentPost)
+      .put<{message: string}>('http://13.48.195.6:80/api/posts/' + currentPost.id, currentPost)
       .subscribe((responseData) => {
         this.router.navigate([''])
       });
@@ -117,6 +117,6 @@ export class PostService {
 
   getPostByIdDb(id: string) {
 
-    return this.http.get<{message: string, post: Post}>(`http://16.171.6.93:80/api/posts/${id}`);
+    return this.http.get<{message: string, post: Post}>(`http://13.48.195.6:80/api/posts/${id}`);
   }
 }
